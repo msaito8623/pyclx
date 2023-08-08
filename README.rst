@@ -10,8 +10,8 @@ Installation
 
 .. code:: bash
 
-    pip install --user pyclx
-
+    git clone https://github.com/msaito8623/pyclx
+    pip install -e /path/to/the/repo
 
 Documentation
 =============
