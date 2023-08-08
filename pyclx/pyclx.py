@@ -14,7 +14,9 @@ def read_celex (which, clx_dir, usecols=None, squeeze=False, index_col=None):
     clx_rd = clx_rd[first_digit_pos:last_pos]
     clx_rd = [ i.split() for i in clx_rd ]
     clms = [ i[1] for i in clx_rd ]
-    clx = pd.read_csv(clx, sep='\\', header=None, names=clms, na_filter=False, usecols=usecols, squeeze=squeeze, index_col=index_col)
+    clx = pd.read_csv(clx, sep='\\', header=None, names=clms, na_filter=False, usecols=usecols, index_col=index_col)
+    if squeeze:
+        clx = clx.squeeze('columns')
     return clx
 
 
