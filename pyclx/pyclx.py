@@ -1,6 +1,6 @@
 import pandas as pd
 
-def read_celex (which, clx_dir, usecols=None, squeeze=False, index_col=None):
+def read_celex (which, clx_dir, usecols=None, squeeze=False, index_col=None, skiprows=None):
     clx = '{}/{}.cd'.format(clx_dir,which)
     clx_rd = '{}/{}.readme'.format(clx_dir,which)
     with open(clx_rd, 'r') as f:
@@ -14,7 +14,7 @@ def read_celex (which, clx_dir, usecols=None, squeeze=False, index_col=None):
     clx_rd = clx_rd[first_digit_pos:last_pos]
     clx_rd = [ i.split() for i in clx_rd ]
     clms = [ i[1] for i in clx_rd ]
-    clx = pd.read_csv(clx, sep='\\', header=None, names=clms, na_filter=False, usecols=usecols, index_col=index_col)
+    clx = pd.read_csv(clx, sep='\\', header=None, names=clms, na_filter=False, usecols=usecols, index_col=index_col, skiprows=skiprows)
     if squeeze:
         clx = clx.squeeze('columns')
     return clx
