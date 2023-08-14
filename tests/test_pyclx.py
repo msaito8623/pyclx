@@ -7,13 +7,13 @@ TEST_ROOT = Path(__file__).parent
 clx_dir = str(TEST_ROOT / 'resources')
 
 pars_read_celex = [
-    (None,           False, None, (51728, 50),  3),
+    (None,           False, None, (51728, 50),  8),
     (None,           False,   10, (   10, 20), 13),
-    (None,            True, None, (51728, 50),  3),
+    (None,            True, None, (51728, 50),  8),
     (None,            True,   10, (   10, 20), 13),
-    (['Head','Def'], False, None, (51728,  4),  3),
+    (['Head','Def'], False, None, (51728,  4),  4),
     (['Head','Def'], False,   10, (   10,  2),  2),
-    (['Head','Def'],  True, None, (51728,  4),  3),
+    (['Head','Def'],  True, None, (51728,  4),  4),
     (['Head','Def'],  True,   10, (   10,  2),  2),
     (['Head'],       False, None, (51728,  1),  1),
     (['Head'],       False,   10, (   10,  1),  1),
