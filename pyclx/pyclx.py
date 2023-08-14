@@ -32,17 +32,24 @@ def find_colnames (readme_path, clen=None):
     rd = rd.loc[rd.str.contains('^[0-9]{1,2}\\. +[A-Za-z]+$', regex=True)].reset_index(drop=True)
     rd = rd.str.replace(' +', ' ', regex=True)
     rd = rd.str.split('. ', regex=False, expand=True).rename(columns={0:'ID',1:'Name'})
+    cr = (rd.ID.astype(int)+1).iloc[:-1]
+    nx = rd.ID.astype(int).shift(-1).iloc[:-1].astype(int)
+    if (cr!=nx).any():
+        rd = rd.iloc[:cr.index[cr!=nx][0]+1,:]
     assert (( (rd.ID.astype(int)+1) == rd.ID.astype(int).shift(-1)).iloc[:-1]).all()
     rd = rd.Name
 
     hd = rd.loc[~rd.duplicated(keep=False)].copy().to_list()
     dp = rd.loc[ rd.duplicated(keep='last')].copy().to_list()
-    assert clen%len(dp)==len(hd)
-
-    dp = [dp]*(clen//len(dp))
-    dp = [ [ j+str(ind) for j in i ] for ind,i in enumerate(dp) ]
-    dp = [ j for i in dp for j in i ]
-    rd = hd + dp
+    if len(dp)==0:
+        assert clen==len(hd)
+        rd = hd
+    else:
+        assert clen%len(dp)==len(hd)
+        dp = [dp]*(clen//len(dp))
+        dp = [ [ j+str(ind) for j in i ] for ind,i in enumerate(dp) ]
+        dp = [ j for i in dp for j in i ]
+        rd = hd + dp
     assert clen==len(rd)
     return rd[:clen]
 
