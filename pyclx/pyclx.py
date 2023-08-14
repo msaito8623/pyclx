@@ -22,6 +22,7 @@ def read_celex (which, clx_dir, usecols=None, squeeze=False, nrows=None):
         clx.columns = pd.Series(clx.columns).str.replace('0$','',regex=True)
     if squeeze:
         clx = clx.squeeze('columns')
+    clx = clx.apply(pd.to_numeric, errors='ignore')
     return clx
 
 def find_colnames (readme_path, clen=None):
