@@ -29,7 +29,8 @@ def find_colnames (readme_path, clen=None):
     with open(readme_path, 'r') as f:
         rd = f.readlines()
     rd = pd.Series(rd).str.strip()
-    rd = rd.loc[rd.str.contains('^[0-9]{1,2}\\. +[A-Za-z]+$', regex=True)].reset_index(drop=True)
+    rd = rd.loc[rd.str.contains('^[0-9]{1,2}\\.{0,1} +[A-Za-z]+$', regex=True)].reset_index(drop=True)
+    rd = rd.str.replace('(?<=[0-9]) ', '.', regex=True) # Restore a missing dot after the number.
     rd = rd.str.replace(' +', ' ', regex=True)
     rd = rd.str.split('. ', regex=False, expand=True).rename(columns={0:'ID',1:'Name'})
     cr = (rd.ID.astype(int)+1).iloc[:-1]
