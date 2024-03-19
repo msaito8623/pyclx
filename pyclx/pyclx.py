@@ -45,8 +45,8 @@ def find_colnames (readme_path, clen=None):
         assert clen==len(hd)
         rd = hd
     else:
-        assert clen%len(dp)==len(hd)
-        dp = [dp]*(clen//len(dp))
+        assert (clen-len(hd))%len(dp)==0
+        dp = [dp]*int((clen-len(hd))/len(dp))
         dp = [ [ j+str(ind) for j in i ] for ind,i in enumerate(dp) ]
         dp = [ j for i in dp for j in i ]
         rd = hd + dp

@@ -32,7 +32,19 @@ pars_read_celex = [
     ('dmw', ['Idnum'],              False, None, (10000,  1),  1),
     ('dmw', ['Idnum'],              False,   10, (   10,  1),  1),
     ('dmw', ['Idnum'],               True, None, (10000,   ),  0),
-    ('dmw', ['Idnum'],               True,   10, (   10,   ),  0)
+    ('dmw', ['Idnum'],               True,   10, (   10,   ),  0),
+    ('epw', None,                   False, None, (10000, 97), 15),
+    ('epw', None,                   False,   10, (   10, 21),  9),
+    ('epw', None,                    True, None, (10000, 97), 15),
+    ('epw', None,                    True,   10, (   10, 21),  9),
+    ('epw', ['IdNum','Word','Cob'], False, None, (10000,  3),  3),
+    ('epw', ['IdNum','Word','Cob'], False,   10, (   10,  3),  3),
+    ('epw', ['IdNum','Word','Cob'],  True, None, (10000,  3),  3),
+    ('epw', ['IdNum','Word','Cob'],  True,   10, (   10,  3),  3),
+    ('epw', ['IdNum'],              False, None, (10000,  1),  1),
+    ('epw', ['IdNum'],              False,   10, (   10,  1),  1),
+    ('epw', ['IdNum'],               True, None, (10000,   ),  0),
+    ('epw', ['IdNum'],               True,   10, (   10,   ),  0)
 ]
 
 @pytest.mark.parametrize('which, usecols, squeeze, nrows, shape, unqclm', pars_read_celex)
